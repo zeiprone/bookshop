@@ -206,15 +206,6 @@ Uygulama şu anda **Stateful Widget** kullanarak state yönetimine sahiptir:
 - `HomeScreen` kategori filtreleme state'i
 - `CartScreen` dinamik sepet güncellemeleri
 
-### 🚀 İleri Özellikler (Gelecek Sürüm)
-
-- [ ] Provider / GetX state management
-- [ ] Backend API entegrasyonu
-- [ ] Gerçek ödeme sistemi
-- [ ] Kullanıcı hesabı ve oturum açma
-- [ ] Beğeniler / Favorites
-- [ ] Yorum ve puanlandırma
-- [ ] Push notifikasyonlar
 
 ### 📚 Kaynaklar
 
@@ -231,12 +222,6 @@ Uygulama şu anda **Stateful Widget** kullanarak state yönetimine sahiptir:
 
 ### 📝 Lisans
 
-Bu proje eğitim amaçlıdır ve açık kaynak kodludur.
+Bu proje software persona şirketinin stajı için yapılmıştır ve açık kaynak kodludur.
 
-### 🤝 Katkılar
 
-Öğrenciler tarafından geliştirilen bu proje, Flutter ve Dart öğreniminin temel seviyesini temsil etmektedir.
-
----
-
-**Happy Coding! 🚀**
