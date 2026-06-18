@@ -110,11 +110,13 @@ Bu proje aşağıdaki Flutter konseptlerini öğretmeyi hedeflemektedir:
 #### Gün 4: JSON ve Listeleme
 - ✅ Model sınıfı oluşturma (Book class)
 - ✅ fromJson / toJson metodları
+- ✅ `assets/data/books.json` dosyasından gerçek JSON okuma
 - ✅ GridView ile dinamik liste oluşturma
+- ✅ Basit arama (başlık/yazar) ve kategori filtreleme
 
 #### Gün 5: Mini Katalog Uygulaması
 - ✅ Ekran tasarımı (Ana sayfa, Detay, Sepet)
-- ✅ Kategori filtreleme
+- ✅ Arama kutusu + kategori filtreleme
 - ✅ Basit state güncelleme (Sepet sistemi)
 - ✅ Responsive UI tasarımı
 
@@ -210,7 +212,6 @@ Uygulama şu anda **Stateful Widget** kullanarak state yönetimine sahiptir:
 - [ ] Backend API entegrasyonu
 - [ ] Gerçek ödeme sistemi
 - [ ] Kullanıcı hesabı ve oturum açma
-- [ ] Arama ve filtreleme
 - [ ] Beğeniler / Favorites
 - [ ] Yorum ve puanlandırma
 - [ ] Push notifikasyonlar

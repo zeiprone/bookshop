@@ -18,60 +18,48 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFFAF7F0),
+          border: Border.all(
+            color: const Color(0xFFE5DFD3),
+            width: 1.5,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image Section
             Container(
-              height: 150,
+              height: 160,
               width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(0xFFE5DFD3),
+                    width: 1.5,
+                  ),
                 ),
-                color: Colors.grey[300],
+                color: Color(0xFFF4F1EA),
               ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-                child: Image.network(
-                  book.imageUrl,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Center(
-                      child: Icon(
-                        Icons.book,
-                        size: 60,
-                        color: Colors.grey[400],
-                      ),
-                    );
-                  },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
-                ),
+              child: Image.asset(
+                book.imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.book_sharp,
+                      size: 48,
+                      color: Color(0xFFC4BDB0),
+                    ),
+                  );
+                },
               ),
             ),
             // Content Section
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,8 +68,11 @@ class BookCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontFamily: 'serif',
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                        color: Color(0xFF1C1A17),
+                        height: 1.2,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -89,55 +80,69 @@ class BookCard extends StatelessWidget {
                       book.author,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.grey[600],
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'sans-serif',
+                        color: Color(0xFF6E675F),
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
+                        horizontal: 8,
+                        vertical: 3,
                       ),
                       decoration: BoxDecoration(
-                        color: _getConditionColor(book.condition),
-                        borderRadius: BorderRadius.circular(4),
+                        color: const Color(0xFFFAF7F0),
+                        border: Border.all(
+                          color: _getConditionBorderColor(book.condition),
+                          width: 1,
+                        ),
                       ),
                       child: Text(
-                        book.condition,
-                        style: const TextStyle(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                        _getConditionTurkish(book.condition),
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontFamily: 'monospace',
+                          color: _getConditionBorderColor(book.condition),
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           '₺${book.price.toStringAsFixed(2)}',
                           style: const TextStyle(
+                            fontFamily: 'serif',
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                            color: Colors.deepPurple,
+                            fontSize: 16,
+                            color: Color(0xFF8A3324),
                           ),
                         ),
                         if (onAddToCart != null)
                           GestureDetector(
                             onTap: onAddToCart,
                             child: Container(
-                              padding: const EdgeInsets.all(4),
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Colors.deepPurple,
-                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: const Color(0xFF1C1A17),
+                                  width: 1.2,
+                                ),
+                                color: const Color(0xFF1C1A17),
                               ),
-                              child: const Icon(
-                                Icons.add_shopping_cart,
-                                size: 16,
-                                color: Colors.white,
+                              child: const Text(
+                                'EKLE',
+                                style: TextStyle(
+                                  color: Color(0xFFFAF7F0),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.0,
+                                ),
                               ),
                             ),
                           ),
@@ -153,16 +158,29 @@ class BookCard extends StatelessWidget {
     );
   }
 
-  Color _getConditionColor(String condition) {
+  Color _getConditionBorderColor(String condition) {
     switch (condition.toLowerCase()) {
       case 'excellent':
-        return Colors.green;
+        return const Color(0xFF3B6B4C); // deep sage green
       case 'good':
-        return Colors.blue;
+        return const Color(0xFF4A6B82); // muted slate blue
       case 'fair':
-        return Colors.orange;
+        return const Color(0xFF9E653A); // muted copper
       default:
-        return Colors.grey;
+        return const Color(0xFF6E675F);
+    }
+  }
+
+  String _getConditionTurkish(String condition) {
+    switch (condition.toLowerCase()) {
+      case 'excellent':
+        return 'ÇOK İYİ';
+      case 'good':
+        return 'İYİ';
+      case 'fair':
+        return 'YIPRANMIŞ';
+      default:
+        return condition.toUpperCase();
     }
   }
 }
